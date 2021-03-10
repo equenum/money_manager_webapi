@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MoneyManager.Api.Infrastructure.Data.Entities;
+using MoneyManager.Api.Infrastructure.Data.EntityFramework.EntityConfigurations;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,13 +16,15 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework
         public ApplicationDbContext() 
             : base(AppConfig.GetConnectionString())
         {
-            // this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // TODO: Extract the configurations to separate classes.
+            modelBuilder.Configurations.Add(new CategoryConfiguration());
+            modelBuilder.Configurations.Add(new TransactionConfiguration());
 
+            /*
             // Transaction
             modelBuilder.Entity<Transaction>()
                 .Property(t => t.Amount)
@@ -48,6 +51,7 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework
             modelBuilder.Entity<Category>()
                 .Property(c => c.Description)
                 .HasMaxLength(2000);
+            */
         }
     }
 }
