@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Api", "MoneyManager.API\MoneyManager.Api.csproj", "{7704D89E-BDD5-46BE-B9F7-694331207ABC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyManager.Api", "MoneyManager.API\MoneyManager.Api.csproj", "{7704D89E-BDD5-46BE-B9F7-694331207ABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Api.Core", "MoneyManager.Api.Core\MoneyManager.Api.Core.csproj", "{E7CD29E5-2693-4E0E-B348-C6A5A91A5AB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyManager.Api.Core", "MoneyManager.Api.Core\MoneyManager.Api.Core.csproj", "{E7CD29E5-2693-4E0E-B348-C6A5A91A5AB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Api.Infrastructure", "MoneyManager.Api.Infrastructure\MoneyManager.Api.Infrastructure.csproj", "{D598B807-CB1A-44AD-8F94-17E4F7CC46B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoneyManager.Api.Infrastructure", "MoneyManager.Api.Infrastructure\MoneyManager.Api.Infrastructure.csproj", "{D598B807-CB1A-44AD-8F94-17E4F7CC46B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C304A636-B0A0-4036-8599-1E2380EE14C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5174F703-B317-41D2-96AA-AE0747A5963A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +34,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7704D89E-BDD5-46BE-B9F7-694331207ABC} = {C304A636-B0A0-4036-8599-1E2380EE14C4}
+		{E7CD29E5-2693-4E0E-B348-C6A5A91A5AB0} = {C304A636-B0A0-4036-8599-1E2380EE14C4}
+		{D598B807-CB1A-44AD-8F94-17E4F7CC46B3} = {C304A636-B0A0-4036-8599-1E2380EE14C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {14A4EAC6-27EE-481A-8B58-E86B1B000054}
