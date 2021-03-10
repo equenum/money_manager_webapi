@@ -13,7 +13,7 @@ namespace MoneyManager.Api.Infrastructure.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202103101724409_AddInitialModel"; }
+            get { return "202103101815569_AddInitialModel"; }
         }
         
         string IMigrationMetadata.Source
