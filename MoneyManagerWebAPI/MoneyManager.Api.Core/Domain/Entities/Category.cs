@@ -1,9 +1,9 @@
-﻿using MoneyManager.Api.Infrastructure.Data.EntityFramework.Entities;
+﻿using MoneyManager.Api.Core.Domain.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MoneyManager.Api.Infrastructure.Data.Entities
+namespace MoneyManager.Api.Core.Domain.Entities
 {
     public class Category : BaseEntity
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MoneyManager.Api.Infrastructure
+namespace MoneyManager.Api.Core
 {
     public enum TransactionType
     {

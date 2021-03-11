@@ -8,6 +8,7 @@ namespace MoneyManager.Api.Infrastructure
 {
     public static class AppConfig
     {
+        // TODO: Move it somewhere more appropriate
         public static string GetConnectionString()
         {
             var builder = GetConfigurationBuilder();

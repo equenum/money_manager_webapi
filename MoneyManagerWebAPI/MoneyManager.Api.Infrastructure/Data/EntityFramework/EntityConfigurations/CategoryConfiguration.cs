@@ -1,4 +1,4 @@
-﻿using MoneyManager.Api.Infrastructure.Data.Entities;
+﻿using MoneyManager.Api.Core.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;

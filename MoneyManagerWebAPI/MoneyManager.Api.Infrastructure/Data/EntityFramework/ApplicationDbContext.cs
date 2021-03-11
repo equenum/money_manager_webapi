@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using MoneyManager.Api.Infrastructure.Data.Entities;
+using MoneyManager.Api.Core.Domain.Entities;
 using MoneyManager.Api.Infrastructure.Data.EntityFramework.EntityConfigurations;
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,7 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework
         public ApplicationDbContext() 
             : base(AppConfig.GetConnectionString())
         {
+            // TODO: Setup explicit loading 
             this.Configuration.LazyLoadingEnabled = false;
         }
 
@@ -23,35 +24,6 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework
         {
             modelBuilder.Configurations.Add(new CategoryConfiguration());
             modelBuilder.Configurations.Add(new TransactionConfiguration());
-
-            /*
-            // Transaction
-            modelBuilder.Entity<Transaction>()
-                .Property(t => t.Amount)
-                .IsRequired();
-
-            modelBuilder.Entity<Transaction>()
-                .Property(t => t.CategoryId)
-                .IsRequired();
-
-            modelBuilder.Entity<Transaction>()
-                .Property(t => t.Type)
-                .IsRequired();
-
-            modelBuilder.Entity<Transaction>()
-                .Property(t => t.Description)
-                .HasMaxLength(2000);
-
-            // Category
-            modelBuilder.Entity<Category>()
-                .Property(c => c.Name)
-                .IsRequired()
-                .HasMaxLength(255);
-
-            modelBuilder.Entity<Category>()
-                .Property(c => c.Description)
-                .HasMaxLength(2000);
-            */
         }
     }
 }

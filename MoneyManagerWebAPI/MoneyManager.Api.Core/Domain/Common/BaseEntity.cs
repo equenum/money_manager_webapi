@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Entities
+namespace MoneyManager.Api.Core.Domain.Common
 {
     public class BaseEntity
     {

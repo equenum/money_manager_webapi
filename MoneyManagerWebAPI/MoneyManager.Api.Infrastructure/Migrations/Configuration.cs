@@ -1,6 +1,7 @@
 ﻿namespace MoneyManager.Api.Infrastructure.Migrations
 {
-    using MoneyManager.Api.Infrastructure.Data.Entities;
+    using MoneyManager.Api.Core;
+    using MoneyManager.Api.Core.Domain.Entities;
     using System;
     using System.Collections.ObjectModel;
     using System.Data.Entity;
