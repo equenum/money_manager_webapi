@@ -9,6 +9,6 @@ namespace MoneyManager.Api.Core.Domain.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public ICollection<Transaction> Transactions { get; set; }
+        public IEnumerable<Transaction> Transactions { get; set; }
     }
 }

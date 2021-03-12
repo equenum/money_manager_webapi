@@ -29,6 +29,14 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
             return _dbSet.ToList();
         }
 
+        public IEnumerable<TEntity> GetAllPaged(int pageNumber, int pageSize)
+        {
+            return _dbSet.Skip((pageNumber - 1) * pageSize)
+                         .Take(pageSize)
+                         .AsNoTracking()
+                         .ToList();
+        }
+
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return _dbSet.Where(predicate);

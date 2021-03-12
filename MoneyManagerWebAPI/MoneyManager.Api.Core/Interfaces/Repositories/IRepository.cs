@@ -9,6 +9,7 @@ namespace MoneyManager.Api.Core.Interfaces.Repositories
     {
         TEntity Get(int id);
         IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAllPaged(int pageNumber, int pageSize);
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
         void Add(TEntity entity);
