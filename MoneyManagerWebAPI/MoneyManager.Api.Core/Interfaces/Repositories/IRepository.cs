@@ -8,14 +8,14 @@ namespace MoneyManager.Api.Core.Interfaces.Repositories
     public interface IRepository<TEntity> where TEntity : class
     {
         TEntity Get(int id);
-        IEnumerable<TEntity> GetAll();
-        IEnumerable<TEntity> GetAllPaged(int pageNumber, int pageSize);
-        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        ICollection<TEntity> GetAll();
+        ICollection<TEntity> GetAllPaged(Expression<Func<TEntity, int>> predicate, int pageNumber, int pageSize);
+        bool Find(Expression<Func<TEntity, bool>> predicate);
 
         void Add(TEntity entity);
-        void AddRange(IEnumerable<TEntity> entities);
+        void AddRange(ICollection<TEntity> entities);
 
         void Remove(TEntity entity);
-        void RemoveRange(IEnumerable<TEntity> entities);
+        void RemoveRange(ICollection<TEntity> entities);
     }
 }

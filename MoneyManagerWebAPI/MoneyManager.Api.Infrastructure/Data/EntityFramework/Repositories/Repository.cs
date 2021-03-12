@@ -24,42 +24,49 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
             return _dbSet.Find(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public ICollection<TEntity> GetAll()
         {
             return _dbSet.ToList();
         }
 
-        public IEnumerable<TEntity> GetAllPaged(int pageNumber, int pageSize)
+        public ICollection<TEntity> GetAllPaged(Expression<Func<TEntity, int>> predicate, int pageNumber, int pageSize)
         {
-            return _dbSet.Skip((pageNumber - 1) * pageSize)
+            return _dbSet.OrderBy(predicate)
+                         .Skip((pageNumber - 1) * pageSize)
                          .Take(pageSize)
                          .AsNoTracking()
                          .ToList();
         }
 
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public bool Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbSet.Where(predicate);
+            var entity = _dbSet.Where(predicate).FirstOrDefault();
+            
+            return entity != null;
         }
 
         public void Add(TEntity entity)
         {
             _dbSet.Add(entity);
+            Context.SaveChanges();
         }
 
-        public void AddRange(IEnumerable<TEntity> entities)
+        public void AddRange(ICollection<TEntity> entities)
         {
             _dbSet.AddRange(entities);
+            Context.SaveChanges();
         }
         
         public void Remove(TEntity entity)
         {
             _dbSet.Remove(entity);
+            Context.SaveChanges();
         }
 
-        public void RemoveRange(IEnumerable<TEntity> entities)
+        public void RemoveRange(ICollection<TEntity> entities)
         {
             _dbSet.RemoveRange(entities);
+            Context.SaveChanges();
         }
     }
 }

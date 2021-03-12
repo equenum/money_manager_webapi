@@ -14,6 +14,7 @@ namespace MoneyManager.Api.Infrastructure
         public static void AddPersistenceInfrastructure(this IServiceCollection services)
         {
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddScoped(_ => new ApplicationDbContext());
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework
         public DbSet<Category> Categories { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
-        public ApplicationDbContext() 
+        public ApplicationDbContext()
             : base(AppConfig.GetConnectionString())
         {
             // TODO: Setup explicit loading 
