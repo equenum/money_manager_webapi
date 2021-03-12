@@ -1,4 +1,5 @@
-﻿using MoneyManager.Api.Core.Domain.Entities;
+﻿using AutoMapper;
+using MoneyManager.Api.Core.Domain.Entities;
 using MoneyManager.Api.Core.Features.Categories.Queries;
 using MoneyManager.Api.Core.Interfaces.Repositories;
 using System;
@@ -10,11 +11,12 @@ namespace MoneyManager.Api.Core.Features.Categories.QueryHandlers
     public class GetAllCategoriesQueryHandler
     {
         private readonly ICategoryRepository _categoryRepository;
-        // TODO: add mapper?
+        private readonly IMapper _mapper;
 
-        public GetAllCategoriesQueryHandler(ICategoryRepository categoryRepository)
+        public GetAllCategoriesQueryHandler(ICategoryRepository categoryRepository, IMapper mapper)
         {
             _categoryRepository = categoryRepository;
+            _mapper = mapper;
         }
 
         public IEnumerable<Category> Handle(GetAllCategoriesQuery query)
