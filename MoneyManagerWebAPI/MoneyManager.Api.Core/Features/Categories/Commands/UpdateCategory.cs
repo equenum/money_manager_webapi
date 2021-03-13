@@ -1,9 +1,5 @@
-﻿using AutoMapper;
-using MediatR;
-using MoneyManager.Api.Core.Domain.Entities;
-using MoneyManager.Api.Core.Dtos.Category;
+﻿using MediatR;
 using MoneyManager.Api.Core.Interfaces;
-using MoneyManager.Api.Core.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Categories.Commands
 {
-    public static class CreateCategory
+    public static class UpdateCategory
     {
         public class Command : IRequest<Response>
         {
-            [Required]
+            public int Id { get; set; }
+
             [MaxLength(255)]
             public string Name { get; set; }
 
-            [Required]
             [MaxLength(2000)]
             public string Description { get; set; }
         }
@@ -29,35 +25,47 @@ namespace MoneyManager.Api.Core.Features.Categories.Commands
         public class Handler : IRequestHandler<Command, Response>
         {
             private readonly IUnitOfWork _unitOfWork;
-            private readonly IMapper _mapper;
 
-            public Handler(IUnitOfWork unitOfWork, IMapper mapper)
+            public Handler(IUnitOfWork unitOfWork)
             {
                 _unitOfWork = unitOfWork;
-                _mapper = mapper;
             }
 
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
-                var category = _mapper.Map<Category>(request);
-                var existingCategory = _unitOfWork.Categories.Find(c => c.Name == category.Name);
+                var category = _unitOfWork.Categories.Find(c => c.Id == request.Id);
 
                 var response = new Response();
 
-                if (existingCategory != null)
+                if (category == null)
                 {
-                    response.Message = "Category already exists!";
-                    response.StatusCode = 409;
+                    response.Message = "Category does not exist!";
+                    response.StatusCode = 400;
 
                     return response;
                 }
 
-                category.Created = DateTime.Now;
-                category.Modified = DateTime.Now;
-                _unitOfWork.Categories.Add(category);
+                if (request.Name == null && request.Description == null)
+                {
+                    response.Message = "There is no argument given!";
+                    response.StatusCode = 400;
 
-                var createdCategory = _unitOfWork.Categories.Find(c => c.Name == category.Name);
-                response.Content = _mapper.Map<CategoryDto>(createdCategory);
+                    return response;
+                }
+
+                if (request.Name != null)
+                {
+                    category.Name = request.Name;
+                    category.Modified = DateTime.Now;
+                }
+
+                if (request.Description != null)
+                {
+                    category.Description = request.Description;
+                    category.Modified = DateTime.Now;
+                }
+
+                _unitOfWork.Complete();
 
                 return response;
             }
@@ -65,7 +73,6 @@ namespace MoneyManager.Api.Core.Features.Categories.Commands
 
         public class Response
         {
-            public CategoryDto Content { get; set; }
             public int StatusCode { get; set; }
             public string Message { get; set; }
         }

@@ -34,9 +34,8 @@ namespace MoneyManager.Api.Controllers
             return Ok(response.Content);
         }
 
-        // Get by Id.
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var response = await _mediator.Send(new GetById.Query(id));
 
@@ -48,26 +47,47 @@ namespace MoneyManager.Api.Controllers
             return Ok(response.Content);
         }
 
-
         [HttpPost]
+        // [Consumes(MediaTypeNames.Application.Json)]
         public async Task<IActionResult> Post(CreateCategory.Command command)
         {
-            // Validate post later
-
             var response = await _mediator.Send(command);
 
             if (response.Content == null)
             {
-                ModelState.AddModelError("", response.ErrorMessage);
-
-                return StatusCode(response.StatusCode, ModelState);
+                return StatusCode(response.StatusCode, response);
             }
 
-            return Ok(response.Content);
+            var categoryDto = response.Content;
+
+            return CreatedAtAction(nameof(GetById), new { id = categoryDto.Id }, categoryDto);
         }
 
-        // Patch / put
+        [HttpPatch("{id:int}")]
+        public async Task<IActionResult> Patch(int id, [FromBody] UpdateCategory.Command command)
+        {
+            command.Id = id;
+            var response = await _mediator.Send(command);
 
-        // Delete
+            if (response.Message != null)
+            {
+                return StatusCode(response.StatusCode, response);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var response = await _mediator.Send(new DeleteCategory.Command(id));
+
+            if (response.Message != null)
+            {
+                return StatusCode(response.StatusCode, response);
+            }
+
+            return NoContent();
+        }
     }
 }
