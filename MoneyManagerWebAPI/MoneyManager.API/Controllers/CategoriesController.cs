@@ -31,19 +31,43 @@ namespace MoneyManager.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(response);
+            return Ok(response.Content);
         }
+
+        // Get by Id.
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var response = await _mediator.Send(new GetById.Query(id));
+
+            if (response == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response.Content);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Post(CreateCategory.Command command)
         {
-            // Probably should return Created 201
             // Validate post later
-            return Ok(await _mediator.Send(command));
+
+            var response = await _mediator.Send(command);
+
+            if (response.Content == null)
+            {
+                ModelState.AddModelError("", response.ErrorMessage);
+
+                return StatusCode(response.StatusCode, ModelState);
+            }
+
+            return Ok(response.Content);
         }
 
-        // Get
-        // Get by Id.
-        // Get paged.
+        // Patch / put
+
+        // Delete
     }
 }

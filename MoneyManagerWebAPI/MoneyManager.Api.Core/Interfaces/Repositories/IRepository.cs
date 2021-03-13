@@ -10,7 +10,7 @@ namespace MoneyManager.Api.Core.Interfaces.Repositories
         TEntity Get(int id);
         ICollection<TEntity> GetAll();
         ICollection<TEntity> GetAllPaged(Expression<Func<TEntity, int>> predicate, int pageNumber, int pageSize);
-        bool Find(Expression<Func<TEntity, bool>> predicate);
+        TEntity Find(Expression<Func<TEntity, bool>> predicate);
 
         void Add(TEntity entity);
         void AddRange(ICollection<TEntity> entities);

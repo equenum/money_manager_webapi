@@ -44,12 +44,13 @@ namespace MoneyManager.Api.Core.Features.Categories.Queries
 
                 foreach (var category in categories)
                 {
-                    response.Categories.Add(_mapper.Map<CategoryDto>(category));
+                    response.Content.Add(_mapper.Map<CategoryDto>(category));
                 }
 
                 return response;
             }
 
+            // TODO: Validation with MediatR?
             private void ValidateRequest(Query request)
             {
                 request.PageNumber = request.PageNumber != 0 ? request.PageNumber : 1;
@@ -59,7 +60,7 @@ namespace MoneyManager.Api.Core.Features.Categories.Queries
 
         public class Response
         {
-            public ICollection<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
+            public ICollection<CategoryDto> Content { get; set; } = new List<CategoryDto>();
         }
     }
 }

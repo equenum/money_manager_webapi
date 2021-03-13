@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MoneyManager.Api.Core.Interfaces;
 using MoneyManager.Api.Core.Interfaces.Repositories;
 using MoneyManager.Api.Infrastructure.Data.EntityFramework;
 using MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories;
@@ -14,6 +15,8 @@ namespace MoneyManager.Api.Infrastructure
         public static void AddPersistenceInfrastructure(this IServiceCollection services)
         {
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ITransactionRepository, TransactionRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped(_ => new ApplicationDbContext());
         }
     }

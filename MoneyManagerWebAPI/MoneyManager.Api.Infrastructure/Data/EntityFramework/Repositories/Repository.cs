@@ -38,11 +38,11 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
                          .ToList();
         }
 
-        public bool Find(Expression<Func<TEntity, bool>> predicate)
+        public TEntity Find(Expression<Func<TEntity, bool>> predicate)
         {
             var entity = _dbSet.Where(predicate).FirstOrDefault();
             
-            return entity != null;
+            return entity;
         }
 
         public void Add(TEntity entity)
