@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MoneyManager.Api</name>
+    </assembly>
+    <members>
+        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.Get(MoneyManager.Api.Core.Features.Categories.Queries.GetAllCategories.Query)">
+            <summary>
+            Gets categories (paginated).
+            </summary>
+            <returns>A list of categories according to the specified page parameters.</returns>
+        </member>
+        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.GetById(System.Int32)">
+            <summary>
+            Gets a category by id.
+            </summary>
+            <param name="id">Category id.</param>
+            <returns>A category with the specified id.</returns>
+        </member>
+        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.Post(MoneyManager.Api.Core.Features.Categories.Commands.CreateCategory.Command)">
+            <summary>
+            Creates a new category.
+            </summary>
+            <returns>The newly  created category.</returns>
+        </member>
+        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.Patch(System.Int32,MoneyManager.Api.Core.Features.Categories.Commands.UpdateCategory.Command)">
+            <summary>
+            Updates a category with the specified id.
+            </summary>
+            <param name="id">Request category id.</param>
+        </member>
+        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.Delete(System.Int32)">
+            <summary>
+            Deletes a category with the specified id.
+            </summary>
+            <param name="id">Category id.</param>
+        </member>
+    </members>
+</doc>

@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace MoneyManager.Api.Core
+namespace MoneyManager.Api.Core.Extensions
 {
-    public static class ServiceExtensions
+    public static class CoreServiceExtensions
     {
         public static void AddApplicationCoreLayer(this IServiceCollection services)
         {

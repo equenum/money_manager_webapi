@@ -16,10 +16,7 @@ namespace MoneyManager.Api.Core.Features.Categories.Queries
         {
             public int Id { get; set; }
 
-            public Query(int id)
-            {
-                Id = id;
-            }
+            public Query(int id) => Id = id;
         }
 
         public class Handler : IRequestHandler<Query, Response>

@@ -15,7 +15,13 @@ namespace MoneyManager.Api.Core.Features.Categories.Queries
     {
         public class Query : IRequest<Response>
         {
+            /// <summary>
+            /// Request page number.
+            /// </summary>
             public int PageNumber { get; set; } = 1;
+            /// <summary>
+            /// Request page size.
+            /// </summary>
             public int PageSize { get; set; } = 10;
         }
 

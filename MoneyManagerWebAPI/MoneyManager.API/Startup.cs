@@ -7,12 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MoneyManager.Api.Infrastructure;
-using MoneyManager.Api.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MoneyManager.Api.Infrastructure.Data.EntityFramework;
+using MoneyManager.Api.Core.Extensions;
+using MoneyManager.Api.Extensions;
 
 namespace MoneyManager.API
 {
@@ -31,6 +31,7 @@ namespace MoneyManager.API
             services.AddApplicationCoreLayer();
             services.AddPersistenceInfrastructure();
             services.AddControllers();
+            services.AddSwaggerExtension();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +43,10 @@ namespace MoneyManager.API
             }
 
             app.UseHttpsRedirection();
+
+            //app.UseSwagger();
+            app.UseSwaggerUIExtension();
+            //app.UseSwaggerUI();
 
             app.UseRouting();
 
