@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using MoneyManager.Api.Configurations;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +14,27 @@ namespace MoneyManager.Api.Extensions
     {
         public static void AddSwaggerExtension(this IServiceCollection services)
         {
-            services.AddSwaggerGen(options => 
+            services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("MoneyManagerOpenAPISpec",
-                    new Microsoft.OpenApi.Models.OpenApiInfo()
-                    {
-                        Title = "Money Manager API",
-                        Version = "1",
-                        Description = "Web API for managing personal finance records."
-                    });
-
                 options.CustomSchemaIds(type => type.FullName);
-                options.IncludeXmlComments(string.Format(@"{0}\MoneyManager.Api.xml", 
+                options.IncludeXmlComments(string.Format(@"{0}\MoneyManager.Api.xml",
                                            AppDomain.CurrentDomain.BaseDirectory));
+            });
+        }
+
+        public static void AddApiVersioningExtension(this IServiceCollection services)
+        {
+            services.AddApiVersioning(options => 
+            {
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
+            });
+
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, SwaggerOptionsConfiguration>();
+            services.AddVersionedApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
             });
         }
     }

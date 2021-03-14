@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using MoneyManager.Api.Core.Domain.Entities;
+﻿using MoneyManager.Api.Core.Domain.Entities;
+using MoneyManager.Api.Infrastructure.Configurations;
 using MoneyManager.Api.Infrastructure.Data.EntityFramework.EntityConfigurations;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Text;
 
 namespace MoneyManager.Api.Infrastructure.Data.EntityFramework
 {
@@ -14,9 +13,8 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework
         public DbSet<Transaction> Transactions { get; set; }
 
         public ApplicationDbContext()
-            : base(AppConfig.GetConnectionString())
+            : base(AppConfiguration.GetConnectionString())
         {
-            // TODO: Setup explicit loading 
             this.Configuration.LazyLoadingEnabled = false;
         }
 

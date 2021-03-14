@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace MoneyManager.Api.Infrastructure
+namespace MoneyManager.Api.Infrastructure.Configurations
 {
-    public static class AppConfig
+    public static class AppConfiguration
     {
         // TODO: Move it somewhere more appropriate
         public static string GetConnectionString()

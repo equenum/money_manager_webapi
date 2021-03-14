@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using MoneyManager.Api.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -13,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MoneyManager.Api.Core.Extensions;
 using MoneyManager.Api.Extensions;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace MoneyManager.API
 {
@@ -30,12 +28,15 @@ namespace MoneyManager.API
         {
             services.AddApplicationCoreLayer();
             services.AddPersistenceInfrastructure();
-            services.AddControllers();
             services.AddSwaggerExtension();
+            services.AddControllers();
+            services.AddApiVersioningExtension();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, 
+                                IWebHostEnvironment env, 
+                                   IApiVersionDescriptionProvider prov)
         {
             if (env.IsDevelopment())
             {
@@ -44,9 +45,7 @@ namespace MoneyManager.API
 
             app.UseHttpsRedirection();
 
-            //app.UseSwagger();
-            app.UseSwaggerUIExtension();
-            //app.UseSwaggerUI();
+            app.UseSwaggerUIExtension(prov);
 
             app.UseRouting();
 

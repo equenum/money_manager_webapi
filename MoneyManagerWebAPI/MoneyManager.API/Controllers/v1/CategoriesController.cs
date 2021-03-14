@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
