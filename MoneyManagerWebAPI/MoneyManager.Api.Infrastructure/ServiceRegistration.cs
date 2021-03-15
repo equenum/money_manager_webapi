@@ -16,6 +16,7 @@ namespace MoneyManager.Api.Infrastructure
         {
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<ITransactionRepository, TransactionRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped(_ => new ApplicationDbContext());
         }

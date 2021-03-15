@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
 {
-    public class TransactionRepository : Repository<Transaction>, ITransactionRepository
+    public class TransactionRepository : GenericRepository<Transaction>, ITransactionRepository
     {
         public ApplicationDbContext ApplicationDbContext
         {

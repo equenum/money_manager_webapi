@@ -8,12 +8,12 @@ using System.Text;
 
 namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         protected readonly DbContext Context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(DbContext context)
+        public GenericRepository(DbContext context)
         {
             Context = context;
             _dbSet = Context.Set<TEntity>();

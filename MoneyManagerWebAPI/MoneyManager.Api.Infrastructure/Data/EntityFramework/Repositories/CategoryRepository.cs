@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
 {
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
     {
         public ApplicationDbContext ApplicationDbContext 
         {

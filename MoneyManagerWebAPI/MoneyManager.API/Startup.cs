@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 using MoneyManager.Api.Core.Extensions;
 using MoneyManager.Api.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using MoneyManager.Api.Core.Domain.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace MoneyManager.API
 {
@@ -29,6 +33,34 @@ namespace MoneyManager.API
             services.AddApplicationCoreLayer();
             services.AddPersistenceInfrastructure();
             services.AddSwaggerExtension();
+
+            // TODO: Extract out of here later
+            services.AddCors();
+            var secretSettingsSection = Configuration.GetSection("SecretSettings");
+            services.Configure<SecretSettings>(secretSettingsSection);
+
+            var secretSettings = secretSettingsSection.Get<SecretSettings>();
+            var key = Encoding.ASCII.GetBytes(secretSettings.Secret);
+
+            services.AddAuthentication(options => 
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options => 
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            // Extract down until this line
+
             services.AddControllers();
             services.AddApiVersioningExtension();
         }
@@ -48,6 +80,17 @@ namespace MoneyManager.API
             app.UseSwaggerUIExtension(prov);
 
             app.UseRouting();
+
+            // Extract
+            app.UseCors(options => 
+            {
+                options.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            });
+
+            app.UseAuthentication();
+            // Until here
 
             app.UseAuthorization();
 

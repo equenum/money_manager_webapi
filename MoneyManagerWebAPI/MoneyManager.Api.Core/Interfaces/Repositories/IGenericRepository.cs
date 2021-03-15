@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MoneyManager.Api.Core.Interfaces.Repositories
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity> where TEntity : class
     {
         TEntity Get(int id);
         ICollection<TEntity> GetAll();

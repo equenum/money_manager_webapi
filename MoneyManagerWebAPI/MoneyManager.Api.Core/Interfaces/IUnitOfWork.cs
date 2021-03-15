@@ -9,6 +9,7 @@ namespace MoneyManager.Api.Core.Interfaces
     {
         ICategoryRepository Categories { get; }
         ITransactionRepository Transactions { get; }
+        IUserRepository Users { get; }
         int Complete();
     }
 }

@@ -9,7 +9,6 @@ namespace MoneyManager.Api.Core.Domain.Entities
 {
     public class Transaction : BaseEntity
     {
-        // TODO: Range
         public TransactionType Type { get; set; }
         public Category Category { get; set; }
         public int CategoryId { get; set; }

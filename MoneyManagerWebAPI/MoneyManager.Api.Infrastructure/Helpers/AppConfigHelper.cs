@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace MoneyManager.Api.Infrastructure.Configurations
+namespace MoneyManager.Api.Infrastructure.Helpers
 {
-    public static class AppConfiguration
+    public static class AppConfigHelper
     {
-        // TODO: Move it somewhere more appropriate
         public static string GetConnectionString()
         {
             var builder = GetConfigurationBuilder();
