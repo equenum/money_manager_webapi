@@ -30,7 +30,6 @@ namespace MoneyManager.Api.Controllers.v1
         /// </summary>
         /// <returns>A list of categories according to the specified page parameters.</returns>
         [HttpGet]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<CategoryDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get([FromQuery] GetAllCategories.Query query)
@@ -51,7 +50,6 @@ namespace MoneyManager.Api.Controllers.v1
         /// <param name="id">Category id.</param>
         /// <returns>A category with the specified id.</returns>
         [HttpGet("{id:int}")]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CategoryDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
@@ -71,7 +69,6 @@ namespace MoneyManager.Api.Controllers.v1
         /// </summary>
         /// <returns>The newly  created category.</returns>
         [HttpPost]
-        [Authorize]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CategoryDto))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(CreateCategory.Response))]
@@ -94,7 +91,7 @@ namespace MoneyManager.Api.Controllers.v1
         /// </summary>
         /// <param name="id">Request category id.</param>
         [HttpPatch("{id:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(UpdateCategory.Response))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -116,7 +113,7 @@ namespace MoneyManager.Api.Controllers.v1
         /// </summary>
         /// <param name="id">Category id.</param>
         [HttpDelete("{id:int}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "ADMIN")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(DeleteCategory.Response))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Delete(int id)

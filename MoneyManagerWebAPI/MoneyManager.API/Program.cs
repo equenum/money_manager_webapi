@@ -13,8 +13,6 @@ namespace MoneyManager.API
     {
         // TODO: Async repository
         // TODO: Add Update method to the repository
-        // TODO: Add Users patch
-        // TODO: Replace SecretSettings Sectet with a more realistic key
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

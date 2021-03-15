@@ -40,16 +40,9 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
             return user;
         }
 
-        public bool IsUniqueUser(string username)
+        public User Find(string username)
         {
-            var user = _dbSet.SingleOrDefault(u => u.Name == username);
-
-            if (user != null)
-            {
-                return false;
-            }
-
-            return true;
+            return _dbSet.SingleOrDefault(u => u.Name == username);
         }
 
         public void Register(string username, string password, string role)

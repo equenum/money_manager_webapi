@@ -35,5 +35,17 @@
             </summary>
             <param name="id">Category id.</param>
         </member>
+        <member name="M:MoneyManager.Api.Controllers.v1.UsersController.Authenticate(MoneyManager.Api.Core.Features.Users.Queries.AuthenticateUser.Query)">
+            <summary>
+            Authorizes the user.
+            </summary>
+            <returns>The specified user record along with a generated JWT token.</returns>
+        </member>
+        <member name="M:MoneyManager.Api.Controllers.v1.UsersController.Register(MoneyManager.Api.Core.Features.Users.Commands.RegisterUser.Command)">
+            <summary>
+            Creates a new user.
+            </summary>
+            <returns>The newely created user.</returns>
+        </member>
     </members>
 </doc>

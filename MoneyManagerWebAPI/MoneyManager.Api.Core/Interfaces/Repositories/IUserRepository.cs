@@ -8,7 +8,7 @@ namespace MoneyManager.Api.Core.Interfaces.Repositories
 {
     public interface IUserRepository
     {
-        bool IsUniqueUser(string username);
+        User Find(string username);
         User Authenticate(string username, string password);
         void Register(string username, string password, string role);
     }

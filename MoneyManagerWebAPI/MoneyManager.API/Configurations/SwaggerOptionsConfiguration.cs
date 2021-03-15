@@ -35,7 +35,6 @@ namespace MoneyManager.Api.Configurations
 
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                // TODO: Make description it prettier if needed
                 Description = "JWT Authentication header using the bearer scheme. \r\n\r\n" +
                 "Enter 'Bearer' [space] and then your JWT token. \r\n\r\n" +
                 "For example: Bearer qwerty12345",
