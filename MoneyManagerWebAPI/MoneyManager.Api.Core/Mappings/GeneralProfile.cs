@@ -2,8 +2,10 @@
 using MoneyManager.Api.Core.Domain.Entities;
 using MoneyManager.Api.Core.Domain.Entities.Authentication;
 using MoneyManager.Api.Core.Dtos.Category;
+using MoneyManager.Api.Core.Dtos.Transaction;
 using MoneyManager.Api.Core.Dtos.User;
 using MoneyManager.Api.Core.Features.Categories.Commands;
+using MoneyManager.Api.Core.Features.Transactions.Commands;
 using MoneyManager.Api.Core.Features.Users.Commands;
 using MoneyManager.Api.Core.Features.Users.Queries;
 using System;
@@ -17,11 +19,15 @@ namespace MoneyManager.Api.Core.Mappings
         public GeneralProfile()
         {
             CreateMap<Category, CategoryDto>().ReverseMap();
-            CreateMap<CreateCategory.Command, Category>();
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<User, UserAuthDto>().ReverseMap();
-            CreateMap<AuthenticateUser.Query, User>();
+            CreateMap<Transaction, TransactionDto>().ReverseMap();
+
+            CreateMap<CreateCategory.Command, Category>();
             CreateMap<RegisterUser.Command, User>();
+            CreateMap<CreateTransaction.Command, Transaction>();
+
+            CreateMap<AuthenticateUser.Query, User>();
         }
     }
 }

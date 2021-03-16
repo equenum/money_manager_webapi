@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using MoneyManager.Api.Core.Dtos.Category;
+using MoneyManager.Api.Core.Dtos.Transaction;
 using MoneyManager.Api.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MoneyManager.Api.Core.Features.Categories.Queries
+namespace MoneyManager.Api.Core.Features.Transactions.Queries
 {
-    public static class GetById
+    public static class GetTransactionById
     {
         public class Query : IRequest<Response>
         {
@@ -32,16 +32,15 @@ namespace MoneyManager.Api.Core.Features.Categories.Queries
 
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                var category = _unitOfWork.Categories.Get(request.Id);
+                var transaction = _unitOfWork.Transactions.Get(request.Id);
 
-                if (category == null)
+                if (transaction == null)
                 {
                     return null;
                 }
 
                 var response = new Response();
-                var categoryDto = _mapper.Map<CategoryDto>(category);
-                response.Content = categoryDto;
+                response.Content = _mapper.Map<TransactionDto>(transaction);
 
                 return response;
             }
@@ -49,7 +48,7 @@ namespace MoneyManager.Api.Core.Features.Categories.Queries
 
         public class Response
         {
-            public CategoryDto Content { get; set; }
+            public TransactionDto Content { get; set; }
         }
     }
 }

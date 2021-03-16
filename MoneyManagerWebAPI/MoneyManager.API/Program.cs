@@ -12,7 +12,6 @@ namespace MoneyManager.API
     public class Program
     {
         // TODO: Async repository
-        // TODO: Add Update method to the repository
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
