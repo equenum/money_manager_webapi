@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MoneyManager.Api.Infrastructure
+namespace MoneyManager.Api.Infrastructure.Extentions
 {
     public static class ServiceRegistration
     {

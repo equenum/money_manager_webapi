@@ -36,11 +36,11 @@ namespace MoneyManager.Api.Core.Features.TransactionReports.Queries
                 {
                     return null;
                 }
+
                 var response = new Response();
 
-                var report = new TransactionReport(transactions);
-                // TODO: Change for decorated report
-                response.Content = report.CalculateTotal();
+                var calculableReport = new CalculableTransactionReport(new TransactionReport(transactions));
+                response.Content = calculableReport.CalculateTotal();
 
                 return response;
             }

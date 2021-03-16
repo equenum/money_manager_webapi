@@ -1,5 +1,6 @@
 ﻿using MoneyManager.Api.Core;
 using MoneyManager.Api.Core.Domain.Common;
+using MoneyManager.Api.Core.Interfaces.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace MoneyManager.Api.Core.Domain.Entities
 {
-    public class Transaction : BaseEntity
+    public class Transaction : BaseEntity, ITransaction
     {
         public TransactionType Type { get; set; }
         public Category Category { get; set; }

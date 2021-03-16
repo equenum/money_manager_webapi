@@ -11,8 +11,7 @@ namespace MoneyManager.API
 {
     public class Program
     {
-        // TODO: Async repository + remake then to use model interfaces
-        // TODO: Exctracte interfaces
+        // TODO: Async repository 
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
