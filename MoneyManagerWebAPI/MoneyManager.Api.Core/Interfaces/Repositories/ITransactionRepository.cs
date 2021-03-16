@@ -9,7 +9,7 @@ namespace MoneyManager.Api.Core.Interfaces.Repositories
     {
         ICollection<Transaction> GetByCategory(int categoryId);
         ICollection<Transaction> GetByDay(DateTime date);
-        ICollection<Transaction> GetByPeriod(DateTime firstDate, DateTime lastDay);
+        ICollection<Transaction> GetByPeriod(DateTime beginningDate, DateTime endDate);
         Transaction GetNewelyCreated(DateTime date, int categoryId, int amount);
     }
 }

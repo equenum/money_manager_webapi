@@ -14,7 +14,6 @@ namespace MoneyManager.Api.Controllers.v1
     [ApiController]
     public class ReportsController : ControllerBase
     {
-        // get a report for a single day
         // get a report for a period of time (one month)
         private readonly IMediator _mediator;
 
@@ -23,16 +22,42 @@ namespace MoneyManager.Api.Controllers.v1
             _mediator = mediator;
         }
 
-        // Get report by a day
-        [HttpGet] // set name
-        [Consumes(MediaTypeNames.Application.Json)]
-        // Produces response type
-        public async Task<IActionResult> GetReportByDay([FromQuery] GetReportByDate.Query query)
+        /// <summary>
+        /// Gets a transaction report total amount for the specified date.
+        /// </summary>
+        /// <returns>Transaction report total amount for the specified date.</returns>
+        [HttpGet("GetTotalByDate")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<GetTotalByDate.Response>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetTotalByDate([FromQuery] GetTotalByDate.Query query)
         {
             var response = await _mediator.Send(query);
 
+            if (response == null)
+            {
+                return NotFound();
+            }
+
             return Ok(response.Content);
         }
-        
+
+        /// <summary>
+        /// Gets a transaction report total amount for the specified period of time.
+        /// </summary>
+        /// <returns>Transaction report total amount for the specified period of time.</returns>
+        [HttpGet("GetTotalByPeriod")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<GetTotalByPeriod.Response>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetTotalByPeriod([FromQuery] GetTotalByPeriod.Query query)
+        {
+            var response = await _mediator.Send(query);
+
+            if (response == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response.Content);
+        }
     }
 }

@@ -1,40 +1,45 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using MoneyManager.Api.Core.Domain.Entities;
 using MoneyManager.Api.Core.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.TransactionReports.Queries
 {
-    public class GetReportByDate
+    public static class GetTotalByPeriod
     {
         public class Query : IRequest<Response>
         {
-            public DateTime ReportDate { get; set; }
+            [Required]
+            public DateTime BeginningDate { get; set; }
+
+            [Required]
+            public DateTime EndDate { get; set; }
         }
 
         public class Handler : IRequestHandler<Query, Response>
         {
             private readonly IUnitOfWork _unitOfWork;
-            private readonly IMapper _mapper;
-
-            public Handler(IUnitOfWork unitOfWork, IMapper mapper)
+            public Handler(IUnitOfWork unitOfWork)
             {
                 _unitOfWork = unitOfWork;
-                _mapper = mapper;
             }
 
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                var transactions = _unitOfWork.Transactions.GetByDay(request.ReportDate);
+                var transactions = _unitOfWork.Transactions.GetByPeriod(request.BeginningDate, request.EndDate);
+
+                if (transactions.Count == 0)
+                {
+                    return null;
+                }
 
                 var response = new Response();
-                // if null
-
+                // TODO: Change for decorated report
                 var report = new TransactionReport(transactions);
                 response.Content = report.CalculateTotal();
 

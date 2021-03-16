@@ -35,6 +35,18 @@
             </summary>
             <param name="id">Category id.</param>
         </member>
+        <member name="M:MoneyManager.Api.Controllers.v1.ReportsController.GetTotalByDate(MoneyManager.Api.Core.Features.TransactionReports.Queries.GetTotalByDate.Query)">
+            <summary>
+            Gets a transaction report total amount for the specified date.
+            </summary>
+            <returns>Transaction report total amount for the specified date.</returns>
+        </member>
+        <member name="M:MoneyManager.Api.Controllers.v1.ReportsController.GetTotalByPeriod(MoneyManager.Api.Core.Features.TransactionReports.Queries.GetTotalByPeriod.Query)">
+            <summary>
+            Gets a transaction report total amount for the specified period of time.
+            </summary>
+            <returns>Transaction report total amount for the specified period of time.</returns>
+        </member>
         <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.Get(MoneyManager.Api.Core.Features.Transactions.Queries.GetAllTransactions.Query)">
             <summary>
             Gets transactions (paginated).
