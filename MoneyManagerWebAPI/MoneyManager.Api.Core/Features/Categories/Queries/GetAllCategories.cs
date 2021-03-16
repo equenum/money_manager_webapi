@@ -38,7 +38,7 @@ namespace MoneyManager.Api.Core.Features.Categories.Queries
 
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                var categories = _unitOfWork.Categories.GetAllPaged(c => c.Id, request.PageNumber, request.PageSize);
+                var categories = await _unitOfWork.Categories.GetAllPagedAsync(c => c.Id, request.PageNumber, request.PageSize);
 
                 if (categories.Count == 0)
                 {

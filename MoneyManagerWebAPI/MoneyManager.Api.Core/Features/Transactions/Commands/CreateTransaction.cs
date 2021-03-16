@@ -50,9 +50,8 @@ namespace MoneyManager.Api.Core.Features.Transactions.Commands
 
                 transaction.Created = DateTime.Now;
                 transaction.Modified = DateTime.Now;
-                _unitOfWork.Transactions.Add(transaction);
 
-                var createdTransaction = _unitOfWork.Transactions.GetNewelyCreated(transaction.Created, transaction.CategoryId, transaction.Amount);
+                var createdTransaction = await _unitOfWork.Transactions.AddAsync(transaction);
                 response.Content = _mapper.Map<TransactionDto>(createdTransaction);
 
                 return response;

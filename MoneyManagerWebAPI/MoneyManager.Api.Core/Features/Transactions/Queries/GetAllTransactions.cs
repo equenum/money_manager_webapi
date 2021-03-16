@@ -37,7 +37,7 @@ namespace MoneyManager.Api.Core.Features.Transactions.Queries
 
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                var transactions = _unitOfWork.Transactions.GetAllPaged(t => t.Id, request.PageNumber, request.PageSize);
+                var transactions = await _unitOfWork.Transactions.GetAllPagedAsync(t => t.Id, request.PageNumber, request.PageSize);
 
                 if (transactions.Count == 0)
                 {

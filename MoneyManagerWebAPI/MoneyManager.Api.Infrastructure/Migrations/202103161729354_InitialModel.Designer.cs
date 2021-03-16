@@ -7,13 +7,13 @@ namespace MoneyManager.Api.Infrastructure.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddInitialModel : IMigrationMetadata
+    public sealed partial class InitialModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddInitialModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "202103101815569_AddInitialModel"; }
+            get { return "202103161729354_InitialModel"; }
         }
         
         string IMigrationMetadata.Source

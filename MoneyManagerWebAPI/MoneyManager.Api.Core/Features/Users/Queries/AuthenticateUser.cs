@@ -18,7 +18,7 @@ namespace MoneyManager.Api.Core.Features.Users.Queries
         {
             [Required]
             [MaxLength(20)]
-            public string Name { get; set; }
+            public string Username { get; set; }
 
             [Required]
             [MaxLength(20)]
@@ -39,7 +39,7 @@ namespace MoneyManager.Api.Core.Features.Users.Queries
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
                 var requestUser = _mapper.Map<User>(request);
-                var existingUser = _unitOfWork.Users.Find(requestUser.Name);
+                var existingUser = await _unitOfWork.Users.FindAsync(requestUser.Username);
 
                 var response = new Response();
 
@@ -51,7 +51,7 @@ namespace MoneyManager.Api.Core.Features.Users.Queries
                     return response;
                 }
 
-                var targetUser = _unitOfWork.Users.Authenticate(requestUser.Name, requestUser.Password);
+                var targetUser = await _unitOfWork.Users.AuthenticateAsync(requestUser.Username, requestUser.Password);
 
                 if (targetUser == null)
                 {

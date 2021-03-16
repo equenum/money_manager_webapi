@@ -32,15 +32,17 @@ namespace MoneyManager.Api.Core.Features.Categories.Queries
 
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                var category = _unitOfWork.Categories.Get(request.Id);
+                var category = await _unitOfWork.Categories.GetAsync(request.Id);
 
                 if (category == null)
                 {
                     return null;
                 }
 
-                var response = new Response();
-                response.Content = _mapper.Map<CategoryDto>(category);
+                var response = new Response
+                {
+                    Content = _mapper.Map<CategoryDto>(category)
+                };
 
                 return response;
             }

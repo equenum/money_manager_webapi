@@ -13,9 +13,9 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework
     {
         private readonly ApplicationDbContext _context;
 
-        public ICategoryRepository Categories { get; private set; }
-        public ITransactionRepository Transactions { get; private set; }
-        public IUserRepository Users { get; private set; }
+        public ICategoryRepositoryAsync Categories { get; private set; }
+        public ITransactionRepositoryAsync Transactions { get; private set; }
+        public IUserRepositoryAsync Users { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context, IOptions<SecretSettings> secretSettings)
         {

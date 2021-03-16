@@ -34,11 +34,11 @@ namespace MoneyManager.Api.Core.Domain.Entities
             {
                 if (transaction.Type == TransactionType.Expense)
                 {
-                    Total = Total - transaction.Amount;
+                    Total -= transaction.Amount;
                 }
                 else
                 {
-                    Total = Total + transaction.Amount;
+                    Total += transaction.Amount;
                 }
             }
 

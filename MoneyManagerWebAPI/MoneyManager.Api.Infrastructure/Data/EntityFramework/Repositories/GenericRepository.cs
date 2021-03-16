@@ -5,10 +5,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepositoryAsync<TEntity> where TEntity : class
     {
         protected readonly DbContext Context;
         private readonly DbSet<TEntity> _dbSet;
@@ -19,52 +20,56 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
             _dbSet = Context.Set<TEntity>();
         }
 
-        public TEntity Get(int id)
+        public async Task<TEntity> GetAsync(int id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
-        public ICollection<TEntity> GetAll()
+        public async Task<ICollection<TEntity>> GetAllAsync()
         {
-            return _dbSet.ToList();
+            return await _dbSet.ToListAsync();
         }
 
-        public ICollection<TEntity> GetAllPaged(Expression<Func<TEntity, int>> predicate, int pageNumber, int pageSize)
+        public async Task<ICollection<TEntity>> GetAllPagedAsync(Expression<Func<TEntity, int>> predicate, int pageNumber, int pageSize)
         {
-            return _dbSet.OrderBy(predicate)
+            return await _dbSet.OrderBy(predicate)
                          .Skip((pageNumber - 1) * pageSize)
                          .Take(pageSize)
                          .AsNoTracking()
-                         .ToList();
+                         .ToListAsync();
         }
 
-        public TEntity Find(Expression<Func<TEntity, bool>> predicate)
+        public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbSet.Where(predicate).FirstOrDefault();
+            return await _dbSet.Where(predicate).FirstOrDefaultAsync();
         }
 
-        public void Add(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             _dbSet.Add(entity);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
+
+            return entity;
         }
 
-        public void AddRange(ICollection<TEntity> entities)
+        public async Task<ICollection<TEntity>> AddRangeAsync(ICollection<TEntity> entities)
         {
             _dbSet.AddRange(entities);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
+
+            return entities;
         }
         
-        public void Remove(TEntity entity)
+        public async Task RemoveAsync(TEntity entity)
         {
             _dbSet.Remove(entity);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
 
-        public void RemoveRange(ICollection<TEntity> entities)
+        public async Task RemoveRangeAsync(ICollection<TEntity> entities)
         {
             _dbSet.RemoveRange(entities);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
     }
 }

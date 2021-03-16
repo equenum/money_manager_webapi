@@ -14,9 +14,9 @@ namespace MoneyManager.Api.Infrastructure.Extentions
     {
         public static void AddPersistenceInfrastructure(this IServiceCollection services)
         {
-            services.AddTransient<ICategoryRepository, CategoryRepository>();
-            services.AddTransient<ITransactionRepository, TransactionRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICategoryRepositoryAsync, CategoryRepository>();
+            services.AddTransient<ITransactionRepositoryAsync, TransactionRepository>();
+            services.AddTransient<IUserRepositoryAsync, UserRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddScoped(_ => new ApplicationDbContext());
         }

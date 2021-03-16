@@ -10,10 +10,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUserRepositoryAsync
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<User> _dbSet;
@@ -26,9 +27,9 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
             _secretSettings = secretSettings.Value;
         }
 
-        public User Authenticate(string username, string password)
+        public async Task<User> AuthenticateAsync(string username, string password)
         {
-            var user = _dbSet.SingleOrDefault(u => u.Name == username && u.Password == password);
+            var user = await _dbSet.SingleOrDefaultAsync(u => u.Username == username && u.Password == password);
 
             if (user == null)
             {
@@ -40,22 +41,17 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
             return user;
         }
 
-        public User Find(string username)
+        public async Task<User> FindAsync(string username)
         {
-            return _dbSet.SingleOrDefault(u => u.Name == username);
+            return await _dbSet.SingleOrDefaultAsync(u => u.Username == username);
         }
 
-        public void Register(string username, string password, string role)
+        public async Task<User> RegisterAsync(User user)
         {
-            var user = new User 
-            {
-                Name = username,
-                Password = password,
-                Role = role
-            };
-
             _dbSet.Add(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+
+            return user;
         }
 
         private string GetToken(User user)

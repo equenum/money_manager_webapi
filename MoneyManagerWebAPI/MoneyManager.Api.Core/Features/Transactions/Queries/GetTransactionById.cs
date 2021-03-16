@@ -32,15 +32,17 @@ namespace MoneyManager.Api.Core.Features.Transactions.Queries
 
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                var transaction = _unitOfWork.Transactions.Get(request.Id);
+                var transaction = await _unitOfWork.Transactions.GetAsync(request.Id);
 
                 if (transaction == null)
                 {
                     return null;
                 }
 
-                var response = new Response();
-                response.Content = _mapper.Map<TransactionDto>(transaction);
+                var response = new Response
+                {
+                    Content = _mapper.Map<TransactionDto>(transaction)
+                };
 
                 return response;
             }

@@ -38,7 +38,7 @@ namespace MoneyManager.Api.Core.Features.Transactions.Commands
 
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
-                var transaction = _unitOfWork.Transactions.Find(c => c.Id == request.Id);
+                var transaction = await _unitOfWork.Transactions.FindAsync(c => c.Id == request.Id);
 
                 var response = new Response();
 

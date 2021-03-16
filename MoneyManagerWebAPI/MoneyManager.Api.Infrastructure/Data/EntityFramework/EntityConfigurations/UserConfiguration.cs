@@ -10,7 +10,7 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.EntityConfigurati
     {
         public UserConfiguration()
         {
-            Property(u => u.Name)
+            Property(u => u.Username)
                 .HasMaxLength(20)
                 .IsRequired();
 

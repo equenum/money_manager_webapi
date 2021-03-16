@@ -30,7 +30,7 @@ namespace MoneyManager.Api.Core.Features.TransactionReports.Queries
 
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                var transactions = _unitOfWork.Transactions.GetByDay(request.ReportDate);
+                var transactions = await _unitOfWork.Transactions.GetByDateAsync(request.ReportDate);
 
                 if (transactions.Count == 0)
                 {

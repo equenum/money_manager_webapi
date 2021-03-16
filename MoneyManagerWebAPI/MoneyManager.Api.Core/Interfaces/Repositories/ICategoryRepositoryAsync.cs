@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MoneyManager.Api.Core.Interfaces.Repositories
 {
-    public interface ICategoryRepository : IGenericRepository<Category>
+    public interface ICategoryRepositoryAsync : IGenericRepositoryAsync<Category>
     {
     }
 }

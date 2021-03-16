@@ -31,7 +31,7 @@ namespace MoneyManager.Api.Core.Features.TransactionReports.Queries
 
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                var transactions = _unitOfWork.Transactions.GetByPeriod(request.BeginningDate, request.EndDate);
+                var transactions = await _unitOfWork.Transactions.GetByPeriodAsync(request.BeginningDate, request.EndDate);
 
                 if (transactions.Count == 0)
                 {

@@ -33,7 +33,7 @@ namespace MoneyManager.Api.Core.Features.Categories.Commands
 
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
-                var category = _unitOfWork.Categories.Find(c => c.Id == request.Id);
+                var category = await _unitOfWork.Categories.FindAsync(c => c.Id == request.Id);
 
                 var response = new Response();
 

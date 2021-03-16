@@ -7,9 +7,9 @@ namespace MoneyManager.Api.Core.Interfaces
 {
     public interface IUnitOfWork
     {
-        ICategoryRepository Categories { get; }
-        ITransactionRepository Transactions { get; }
-        IUserRepository Users { get; }
+        ICategoryRepositoryAsync Categories { get; }
+        ITransactionRepositoryAsync Transactions { get; }
+        IUserRepositoryAsync Users { get; }
         int Complete();
     }
 }

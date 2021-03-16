@@ -18,7 +18,7 @@ namespace MoneyManager.Api.Core.Features.Users.Commands
         {
             [Required]
             [MaxLength(20)]
-            public string Name { get; set; }
+            public string Username { get; set; }
 
             [Required]
             [MaxLength(20)]
@@ -45,7 +45,7 @@ namespace MoneyManager.Api.Core.Features.Users.Commands
                 var user = _mapper.Map<User>(request);
                 user.Role = user.Role.ToUpperInvariant();
 
-                var existingUser = _unitOfWork.Users.Find(user.Name);
+                var existingUser = await _unitOfWork.Users.FindAsync(user.Username);
 
                 var response = new Response();
 
@@ -57,9 +57,8 @@ namespace MoneyManager.Api.Core.Features.Users.Commands
                     return response;
                 }
 
-                _unitOfWork.Users.Register(user.Name, user.Password, user.Role);
-                var createdUser = _unitOfWork.Users.Find(user.Name);
-
+                var createdUser = await _unitOfWork.Users.RegisterAsync(user);
+                
                 response.Content = _mapper.Map<UserDto>(createdUser);
 
                 return response;

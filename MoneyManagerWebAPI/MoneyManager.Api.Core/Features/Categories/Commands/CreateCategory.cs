@@ -40,7 +40,7 @@ namespace MoneyManager.Api.Core.Features.Categories.Commands
             public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
                 var category = _mapper.Map<Category>(request);
-                var existingCategory = _unitOfWork.Categories.Find(c => c.Name == category.Name);
+                var existingCategory = await _unitOfWork.Categories.FindAsync(c => c.Name == category.Name);
 
                 var response = new Response();
 
@@ -54,9 +54,8 @@ namespace MoneyManager.Api.Core.Features.Categories.Commands
 
                 category.Created = DateTime.Now;
                 category.Modified = DateTime.Now;
-                _unitOfWork.Categories.Add(category);
-
-                var createdCategory = _unitOfWork.Categories.Find(c => c.Name == category.Name);
+                
+                var createdCategory = await _unitOfWork.Categories.AddAsync(category);
                 response.Content = _mapper.Map<CategoryDto>(createdCategory);
 
                 return response;

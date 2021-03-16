@@ -11,7 +11,6 @@ namespace MoneyManager.API
 {
     public class Program
     {
-        // TODO: Async repository 
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
