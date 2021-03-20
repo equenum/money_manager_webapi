@@ -14,7 +14,6 @@ namespace MoneyManager.Api.Controllers.v1
     [ApiController]
     public class ReportsController : ControllerBase
     {
-        // get a report for a period of time (one month)
         private readonly IMediator _mediator;
 
         public ReportsController(IMediator mediator)
@@ -29,7 +28,7 @@ namespace MoneyManager.Api.Controllers.v1
         [HttpGet("GetTotalByDate")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<GetTotalByDate.Response>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetTotalByDate([FromQuery] GetTotalByDate.Query query)
+        public async Task<IActionResult> GetTotalByDateAsync([FromQuery] GetTotalByDate.Query query)
         {
             var response = await _mediator.Send(query);
 
@@ -48,7 +47,7 @@ namespace MoneyManager.Api.Controllers.v1
         [HttpGet("GetTotalByPeriod")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<GetTotalByPeriod.Response>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetTotalByPeriod([FromQuery] GetTotalByPeriod.Query query)
+        public async Task<IActionResult> GetTotalByPeriodAsync([FromQuery] GetTotalByPeriod.Query query)
         {
             var response = await _mediator.Send(query);
 

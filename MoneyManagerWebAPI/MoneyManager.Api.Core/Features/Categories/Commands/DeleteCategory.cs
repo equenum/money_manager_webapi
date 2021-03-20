@@ -9,10 +9,16 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Categories.Commands
 {
+    /// <summary>
+    /// Represents DeleteCategory CQRS container class.
+    /// </summary>
     public static class DeleteCategory
     {
         public class Command : IRequest<Response>
         {
+            /// <summary>
+            /// Represents the category id.
+            /// </summary>
             public int Id { get; set; }
 
             public Command(int id)

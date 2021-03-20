@@ -9,20 +9,38 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Transactions.Commands
 {
+    /// <summary>
+    /// Represents UpdateTransaction CQRS container class.
+    /// </summary>
     public static class UpdateTransaction
     {
         public class Command : IRequest<Response>
         {
+            /// <summary>
+            /// Representa the transaction's id.
+            /// </summary>
             public int Id { get; set; }
 
+            /// <summary>
+            /// Representa the transaction's type.
+            /// </summary>
             [EnumDataType(typeof(TransactionType))]
             public TransactionType Type { get; set; }
 
+            /// <summary>
+            /// Representa the transaction's category id.
+            /// </summary>
             public int CategoryId { get; set; }
 
+            /// <summary>
+            /// Representa the transaction's description.
+            /// </summary>
             [MaxLength(2000)]
             public string Description { get; set; }
 
+            /// <summary>
+            /// Representa the transaction's amount.
+            /// </summary>
             [Range(1, 20000)]
             public int Amount { get; set; }
         }

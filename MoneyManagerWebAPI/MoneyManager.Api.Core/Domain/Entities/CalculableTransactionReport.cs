@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MoneyManager.Api.Core.Domain.Entities
 {
+    /// <summary>
+    /// Represents a transaction decorator. Adds the ability to calculate transaction total. 
+    /// </summary>
     public class CalculableTransactionReport : ITransactionReport
     {
         private readonly ITransactionReport _decoratedReport;
@@ -15,7 +18,7 @@ namespace MoneyManager.Api.Core.Domain.Entities
             set => _decoratedReport.Total = value; 
         }
 
-        public ICollection<Transaction> Transactions 
+        public List<Transaction> Transactions 
         { 
             get => _decoratedReport.Transactions; 
             set => _decoratedReport.Transactions = value; 
@@ -29,6 +32,11 @@ namespace MoneyManager.Api.Core.Domain.Entities
         public int CalculateTotal()
         {
             Total = 0;
+
+            if (Transactions == null)
+            {
+                return 0;
+            }
 
             foreach (var transaction in Transactions)
             {

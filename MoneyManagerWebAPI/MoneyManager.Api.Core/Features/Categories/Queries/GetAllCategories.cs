@@ -11,16 +11,19 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Categories.Queries
 {
+    /// <summary>
+    /// Represents GetAllCategories CQRS container class.
+    /// </summary>
     public static class GetAllCategories
     {
         public class Query : IRequest<Response>
         {
             /// <summary>
-            /// Request page number.
+            /// Represents the request page number.
             /// </summary>
             public int PageNumber { get; set; } = 1;
             /// <summary>
-            /// Request page size.
+            /// Represents the request page size.
             /// </summary>
             public int PageSize { get; set; } = 10;
         }

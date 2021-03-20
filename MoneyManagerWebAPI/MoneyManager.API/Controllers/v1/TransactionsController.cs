@@ -31,7 +31,7 @@ namespace MoneyManager.Api.Controllers.v1
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<TransactionDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get([FromQuery] GetAllTransactions.Query query)
+        public async Task<IActionResult> GetAsync([FromQuery] GetAllTransactions.Query query)
         {
             var response = await _mediator.Send(query);
 
@@ -48,10 +48,10 @@ namespace MoneyManager.Api.Controllers.v1
         /// </summary>
         /// <param name="id">Transaction id.</param>
         /// <returns>A transaction with the specified id.</returns>
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "GetTransactioByIdAsync")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TransactionDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
             var response = await _mediator.Send(new GetTransactionById.Query(id));
 
@@ -70,12 +70,12 @@ namespace MoneyManager.Api.Controllers.v1
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(TransactionDto))]
-        public async Task<IActionResult> Post([FromBody] CreateTransaction.Command command)
+        public async Task<IActionResult> PostAsync([FromBody] CreateTransaction.Command command)
         {
             var response = await _mediator.Send(command);
             var transactionDto = response.Content;
 
-            return CreatedAtAction(nameof(GetById), new { id = transactionDto.Id }, transactionDto);
+            return CreatedAtRoute("GetTransactioByIdAsync", new { id = transactionDto.Id }, transactionDto);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace MoneyManager.Api.Controllers.v1
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(UpdateTransaction.Response))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Patch(int id, [FromBody] UpdateTransaction.Command command)
+        public async Task<IActionResult> PatchAsync(int id, [FromBody] UpdateTransaction.Command command)
         {
             command.Id = id;
             var response = await _mediator.Send(command);
@@ -108,7 +108,7 @@ namespace MoneyManager.Api.Controllers.v1
         [Authorize(Roles = "ADMIN")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(DeleteTransaction.Response))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             var response = await _mediator.Send(new DeleteTransaction.Command(id));
 

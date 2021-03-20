@@ -13,14 +13,23 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Categories.Commands
 {
+    /// <summary>
+    /// Represents CreateCategory CQRS container class.
+    /// </summary>
     public static class CreateCategory
     {
         public class Command : IRequest<Response>
         {
+            /// <summary>
+            /// Represents the category name.
+            /// </summary>
             [Required]
             [MaxLength(255)]
             public string Name { get; set; }
 
+            /// <summary>
+            /// Represents the category description.
+            /// </summary>
             [Required]
             [MaxLength(2000)]
             public string Description { get; set; }

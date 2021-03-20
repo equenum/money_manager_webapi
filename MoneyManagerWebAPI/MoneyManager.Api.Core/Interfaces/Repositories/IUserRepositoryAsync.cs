@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Interfaces.Repositories
 {
-    public interface IUserRepositoryAsync
+    public interface IUserRepositoryAsync : IGenericUserRepositoryAsync<User>
     {
-        Task<User> FindAsync(string username);
-        Task<User> AuthenticateAsync(string username, string password);
-        Task<User> RegisterAsync(User user);
+        Task<User> AuthenticateAsync(string username, string password); 
     }
 }

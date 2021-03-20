@@ -14,6 +14,9 @@ using System.Text;
 
 namespace MoneyManager.Api.Core.Mappings
 {
+    /// <summary>
+    /// Represents AutoMapper general profiles.
+    /// </summary>
     public class GeneralProfile : Profile
     {
         public GeneralProfile()

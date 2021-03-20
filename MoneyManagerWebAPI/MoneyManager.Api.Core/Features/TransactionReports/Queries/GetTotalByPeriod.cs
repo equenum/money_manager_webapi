@@ -10,13 +10,22 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.TransactionReports.Queries
 {
+    /// <summary>
+    /// Represents GetTotalByPeriod CQRS container class.
+    /// </summary>
     public static class GetTotalByPeriod
     {
         public class Query : IRequest<Response>
         {
+            /// <summary>
+            /// Represents the report beginning date.
+            /// </summary>
             [Required]
             public DateTime BeginningDate { get; set; }
 
+            /// <summary>
+            /// Represents the report ending date.
+            /// </summary>
             [Required]
             public DateTime EndDate { get; set; }
         }
@@ -39,8 +48,11 @@ namespace MoneyManager.Api.Core.Features.TransactionReports.Queries
                 }
 
                 var response = new Response();
-                
-                var calculableReport = new CalculableTransactionReport(new TransactionReport(transactions));
+
+                var transactionReport = new TransactionReport();
+                transactionReport.Transactions.AddRange(transactions);
+
+                var calculableReport = new CalculableTransactionReport(transactionReport);
                 response.Content = calculableReport.CalculateTotal();
 
                 return response;

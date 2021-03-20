@@ -12,18 +12,30 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Users.Commands
 {
+    /// <summary>
+    /// Represents RegisterUser CQRS container class.
+    /// </summary>
     public static class RegisterUser
     {
         public class Command : IRequest<Response>
         {
+            /// <summary>
+            /// Represents the new user's username.
+            /// </summary>
             [Required]
             [MaxLength(20)]
             public string Username { get; set; }
 
+            /// <summary>
+            /// Represents the new user's password.
+            /// </summary>
             [Required]
             [MaxLength(20)]
             public string Password { get; set; }
 
+            /// <summary>
+            /// Represents the new user's role.
+            /// </summary>
             [Required]
             [MaxLength(20)]
             public string Role { get; set; }
@@ -45,7 +57,7 @@ namespace MoneyManager.Api.Core.Features.Users.Commands
                 var user = _mapper.Map<User>(request);
                 user.Role = user.Role.ToUpperInvariant();
 
-                var existingUser = await _unitOfWork.Users.FindAsync(user.Username);
+                var existingUser = await _unitOfWork.Users.FindAsync(u => u.Username == user.Username);
 
                 var response = new Response();
 

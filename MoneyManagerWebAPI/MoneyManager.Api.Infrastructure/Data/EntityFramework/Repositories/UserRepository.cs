@@ -8,22 +8,27 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
 {
-    public class UserRepository : IUserRepositoryAsync
+    public class UserRepository : GenericUserRepositoryAsync<User>, IUserRepositoryAsync
     {
-        private readonly ApplicationDbContext _context;
         private readonly DbSet<User> _dbSet;
         private readonly SecretSettings _secretSettings;
 
-        public UserRepository(ApplicationDbContext context, IOptions<SecretSettings> secretSettings)
+        public ApplicationDbContext ApplicationDbContext
         {
-            _context = context;
-            _dbSet = _context.Users;
+            get { return Context as ApplicationDbContext; }
+        }
+
+        public UserRepository(ApplicationDbContext applicationDbContext, IOptions<SecretSettings> secretSettings)
+            : base(applicationDbContext)
+        {
+            _dbSet = ApplicationDbContext.Users;
             _secretSettings = secretSettings.Value;
         }
 
@@ -37,19 +42,6 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
             }
 
             user.Token = GetToken(user);
-
-            return user;
-        }
-
-        public async Task<User> FindAsync(string username)
-        {
-            return await _dbSet.SingleOrDefaultAsync(u => u.Username == username);
-        }
-
-        public async Task<User> RegisterAsync(User user)
-        {
-            _dbSet.Add(user);
-            await _context.SaveChangesAsync();
 
             return user;
         }

@@ -8,10 +8,16 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Transactions.Commands
 {
+    /// <summary>
+    /// Represents DeleteTransaction CQRS container class.
+    /// </summary>
     public static class DeleteTransaction
     {
         public class Command : IRequest<Response>
         {
+            /// <summary>
+            /// Represents the transaction id.
+            /// </summary>
             public int Id { get; set; }
 
             public Command(int id)

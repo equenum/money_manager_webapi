@@ -32,7 +32,7 @@ namespace MoneyManager.Api.Controllers.v1
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<CategoryDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get([FromQuery] GetAllCategories.Query query)
+        public async Task<IActionResult> GetAsync([FromQuery] GetAllCategories.Query query)
         {
             var response = await _mediator.Send(query);
 
@@ -49,10 +49,10 @@ namespace MoneyManager.Api.Controllers.v1
         /// </summary>
         /// <param name="id">Category id.</param>
         /// <returns>A category with the specified id.</returns>
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "GetCategoryByIdAsync")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CategoryDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
             var response = await _mediator.Send(new GetCategoryById.Query(id));
 
@@ -72,7 +72,7 @@ namespace MoneyManager.Api.Controllers.v1
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(CategoryDto))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(CreateCategory.Response))]
-        public async Task<IActionResult> Post([FromBody] CreateCategory.Command command)
+        public async Task<IActionResult> PostAsync([FromBody] CreateCategory.Command command)
         {
             var response = await _mediator.Send(command);
 
@@ -83,7 +83,7 @@ namespace MoneyManager.Api.Controllers.v1
 
             var categoryDto = response.Content;
 
-            return CreatedAtAction(nameof(GetById), new { id = categoryDto.Id }, categoryDto);
+            return CreatedAtRoute("GetCategoryByIdAsync", new { id = categoryDto.Id }, categoryDto);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace MoneyManager.Api.Controllers.v1
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(UpdateCategory.Response))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Patch(int id, [FromBody] UpdateCategory.Command command)
+        public async Task<IActionResult> PatchAsync(int id, [FromBody] UpdateCategory.Command command)
         {
             command.Id = id;
             var response = await _mediator.Send(command);
@@ -116,7 +116,7 @@ namespace MoneyManager.Api.Controllers.v1
         [Authorize(Roles = "ADMIN")]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(DeleteCategory.Response))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             var response = await _mediator.Send(new DeleteCategory.Command(id));
 

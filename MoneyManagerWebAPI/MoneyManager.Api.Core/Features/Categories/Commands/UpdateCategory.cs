@@ -9,15 +9,27 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Categories.Commands
 {
+    /// <summary>
+    /// Represents UpdateCategory CQRS container class.
+    /// </summary>
     public static class UpdateCategory
     {
         public class Command : IRequest<Response>
         {
+            /// <summary>
+            /// Representes the category id.
+            /// </summary>
             public int Id { get; set; }
 
+            /// <summary>
+            /// Represents the category new name.
+            /// </summary>
             [MaxLength(255)]
             public string Name { get; set; }
 
+            /// <summary>
+            /// Represents the category new description.
+            /// </summary>
             [MaxLength(2000)]
             public string Description { get; set; }
         }

@@ -45,19 +45,5 @@ namespace MoneyManager.Api.Infrastructure.Data.EntityFramework.Repositories
                          .OrderBy(t => t.Id)
                          .ToListAsync();
         }
-
-        public async Task<Transaction> GetNewelyCreatedAsync(DateTime date, int categoryId, int amount)
-        {
-            return await _dbSet.Where(t => t.CategoryId == categoryId && 
-                                     t.Amount == amount && 
-                                     t.Created.Year == date.Year && 
-                                     t.Created.Month == date.Month && 
-                                     t.Created.Day == date.Day && 
-                                     t.Created.Hour == date.Hour &&
-                                     t.Created.Minute == date.Minute && 
-                                     t.Created.Second == date.Second && 
-                                     t.Created.Millisecond == date.Millisecond)
-                         .FirstOrDefaultAsync();
-        }
     }
 }

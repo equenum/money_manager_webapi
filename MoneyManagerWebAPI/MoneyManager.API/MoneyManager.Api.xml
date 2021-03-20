@@ -4,91 +4,102 @@
         <name>MoneyManager.Api</name>
     </assembly>
     <members>
-        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.Get(MoneyManager.Api.Core.Features.Categories.Queries.GetAllCategories.Query)">
+        <member name="T:MoneyManager.Api.ApiRoutes">
+            <summary>
+            Represents a helper for simple management of API controller's endpoints.
+            </summary>
+        </member>
+        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.GetAsync(MoneyManager.Api.Core.Features.Categories.Queries.GetAllCategories.Query)">
             <summary>
             Gets categories (paginated).
             </summary>
             <returns>A list of categories according to the specified page parameters.</returns>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.GetById(System.Int32)">
+        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.GetByIdAsync(System.Int32)">
             <summary>
             Gets a category by id.
             </summary>
             <param name="id">Category id.</param>
             <returns>A category with the specified id.</returns>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.Post(MoneyManager.Api.Core.Features.Categories.Commands.CreateCategory.Command)">
+        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.PostAsync(MoneyManager.Api.Core.Features.Categories.Commands.CreateCategory.Command)">
             <summary>
             Creates a new category.
             </summary>
             <returns>The newly created category.</returns>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.Patch(System.Int32,MoneyManager.Api.Core.Features.Categories.Commands.UpdateCategory.Command)">
+        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.PatchAsync(System.Int32,MoneyManager.Api.Core.Features.Categories.Commands.UpdateCategory.Command)">
             <summary>
             Updates a category with the specified id.
             </summary>
             <param name="id">Request category id.</param>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.Delete(System.Int32)">
+        <member name="M:MoneyManager.Api.Controllers.v1.CategoriesController.DeleteAsync(System.Int32)">
             <summary>
             Deletes a category with the specified id.
             </summary>
             <param name="id">Category id.</param>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.ReportsController.GetTotalByDate(MoneyManager.Api.Core.Features.TransactionReports.Queries.GetTotalByDate.Query)">
+        <member name="M:MoneyManager.Api.Controllers.v1.ReportsController.GetTotalByDateAsync(MoneyManager.Api.Core.Features.TransactionReports.Queries.GetTotalByDate.Query)">
             <summary>
             Gets a transaction report total amount for the specified date.
             </summary>
             <returns>Transaction report total amount for the specified date.</returns>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.ReportsController.GetTotalByPeriod(MoneyManager.Api.Core.Features.TransactionReports.Queries.GetTotalByPeriod.Query)">
+        <member name="M:MoneyManager.Api.Controllers.v1.ReportsController.GetTotalByPeriodAsync(MoneyManager.Api.Core.Features.TransactionReports.Queries.GetTotalByPeriod.Query)">
             <summary>
             Gets a transaction report total amount for the specified period of time.
             </summary>
             <returns>Transaction report total amount for the specified period of time.</returns>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.Get(MoneyManager.Api.Core.Features.Transactions.Queries.GetAllTransactions.Query)">
+        <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.GetAsync(MoneyManager.Api.Core.Features.Transactions.Queries.GetAllTransactions.Query)">
             <summary>
             Gets transactions (paginated).
             </summary>
             <returns>A list of transactions according to the specified page parameters.</returns>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.GetById(System.Int32)">
+        <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.GetByIdAsync(System.Int32)">
             <summary>
             Gets a transaction by id.
             </summary>
             <param name="id">Transaction id.</param>
             <returns>A transaction with the specified id.</returns>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.Post(MoneyManager.Api.Core.Features.Transactions.Commands.CreateTransaction.Command)">
+        <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.PostAsync(MoneyManager.Api.Core.Features.Transactions.Commands.CreateTransaction.Command)">
             <summary>
             Creates a new transaction.
             </summary>
             <returns>The newly created transaction.</returns>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.Patch(System.Int32,MoneyManager.Api.Core.Features.Transactions.Commands.UpdateTransaction.Command)">
+        <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.PatchAsync(System.Int32,MoneyManager.Api.Core.Features.Transactions.Commands.UpdateTransaction.Command)">
             <summary>
             Updates a transaction with the specified id.
             </summary>
             <param name="id">Request transaction id.</param>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.Delete(System.Int32)">
+        <member name="M:MoneyManager.Api.Controllers.v1.TransactionsController.DeleteAsync(System.Int32)">
             <summary>
             Deletes a transaction with the specified id.
             </summary>
             <param name="id">Transaction id.</param>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.UsersController.Authenticate(MoneyManager.Api.Core.Features.Users.Queries.AuthenticateUser.Query)">
+        <member name="M:MoneyManager.Api.Controllers.v1.UsersController.AuthenticateAsync(MoneyManager.Api.Core.Features.Users.Queries.AuthenticateUser.Query)">
             <summary>
             Authorizes the user.
             </summary>
             <returns>The specified user record along with a generated JWT token.</returns>
         </member>
-        <member name="M:MoneyManager.Api.Controllers.v1.UsersController.Register(MoneyManager.Api.Core.Features.Users.Commands.RegisterUser.Command)">
+        <member name="M:MoneyManager.Api.Controllers.v1.UsersController.RegisterAsync(MoneyManager.Api.Core.Features.Users.Commands.RegisterUser.Command)">
             <summary>
             Creates a new user.
             </summary>
             <returns>The newely created user.</returns>
+        </member>
+        <member name="M:MoneyManager.Api.Controllers.v1.UsersController.DeleteAsync(System.Int32)">
+            <summary>
+            Deletes a user with the specified id.
+            </summary>
+            <param name="id">User id.</param>
         </member>
     </members>
 </doc>

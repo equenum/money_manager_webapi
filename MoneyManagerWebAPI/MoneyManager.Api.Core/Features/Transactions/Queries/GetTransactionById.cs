@@ -10,10 +10,16 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Transactions.Queries
 {
+    /// <summary>
+    /// Represents GetTransactionById CQRS container class.
+    /// </summary>
     public static class GetTransactionById
     {
         public class Query : IRequest<Response>
         {
+            /// <summary>
+            /// Represents the transaction's id.
+            /// </summary>
             public int Id { get; set; }
 
             public Query(int id) => Id = id;

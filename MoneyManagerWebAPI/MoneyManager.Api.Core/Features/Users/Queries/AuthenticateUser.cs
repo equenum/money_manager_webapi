@@ -12,14 +12,23 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Users.Queries
 {
+    /// <summary>
+    /// Represents AuthenticateUser CQRS container class.
+    /// </summary>
     public static class AuthenticateUser
     {
         public class Query : IRequest<Response>
         {
+            /// <summary>
+            /// Represents the user's username.
+            /// </summary>
             [Required]
             [MaxLength(20)]
             public string Username { get; set; }
 
+            /// <summary>
+            /// Represents the user's password.
+            /// </summary>
             [Required]
             [MaxLength(20)]
             public string Password { get; set; }
@@ -39,7 +48,7 @@ namespace MoneyManager.Api.Core.Features.Users.Queries
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
                 var requestUser = _mapper.Map<User>(request);
-                var existingUser = await _unitOfWork.Users.FindAsync(requestUser.Username);
+                var existingUser = await _unitOfWork.Users.FindAsync(u => u.Username == requestUser.Username);
 
                 var response = new Response();
 

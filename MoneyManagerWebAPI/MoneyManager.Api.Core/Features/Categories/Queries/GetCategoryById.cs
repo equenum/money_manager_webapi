@@ -10,10 +10,16 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Categories.Queries
 {
+    /// <summary>
+    /// Represents GetCategoryById CQRS container class.
+    /// </summary>
     public static class GetCategoryById
     {
         public class Query : IRequest<Response>
         {
+            /// <summary>
+            /// Represents the category id.
+            /// </summary>
             public int Id { get; set; }
 
             public Query(int id) => Id = id;

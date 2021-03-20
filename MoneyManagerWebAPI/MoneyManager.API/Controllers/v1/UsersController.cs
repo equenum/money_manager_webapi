@@ -31,8 +31,7 @@ namespace MoneyManager.Api.Controllers.v1
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AuthenticateUser.Response))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(AuthenticateUser.Response))]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(AuthenticateUser.Response))]
-        public async Task<IActionResult> Authenticate([FromBody] AuthenticateUser.Query query)
+        public async Task<IActionResult> AuthenticateAsync([FromBody] AuthenticateUser.Query query)
         {
             var response = await _mediator.Send(query);
 
@@ -52,7 +51,7 @@ namespace MoneyManager.Api.Controllers.v1
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(RegisterUser.Response))]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UserDto))]
-        public async Task<IActionResult> Register([FromBody] RegisterUser.Command command)
+        public async Task<IActionResult> RegisterAsync([FromBody] RegisterUser.Command command)
         {
             var response = await _mediator.Send(command);
 
@@ -64,6 +63,27 @@ namespace MoneyManager.Api.Controllers.v1
             var userDto = response.Content;
 
             return CreatedAtAction(null, new { id = userDto.Id }, userDto);
+        }
+
+        /// <summary>
+        /// Deletes a user with the specified id.
+        /// </summary>
+        /// <param name="id">User id.</param>
+        [HttpDelete("{id:int}")]
+        [Authorize(Roles = "ADMIN")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(DeleteUser.Response))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(DeleteUser.Response))]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var response = await _mediator.Send(new DeleteUser.Command(id));
+
+            if (response.Message != null)
+            {
+                return StatusCode(response.StatusCode, response);
+            }
+
+            return NoContent();
         }
     }
 }

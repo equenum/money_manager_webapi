@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace MoneyManager.Api.Core.Features.Transactions.Queries
 {
+    /// <summary>
+    /// Represents GetAllTransactions CQRS container class.
+    /// </summary>
     public static class GetAllTransactions
     {
         public class Query : IRequest<Response>
