@@ -7,7 +7,7 @@ This application has the following architecture:
 
 - Presentation layer: Web API (C#, ASP.NET Core WebAPI);
 - Domain layer: Class Library (C#, .NET Core);
-- Infrastructure layer: Class Library (C#, .NET Core);
+- Infrastructure layer: Class Library (C#, .NET Core).
 
 There are some additional project details (architecture, technologies/patterns used, etc.):
 - RESTful API, OpenAPI Spec (Swagger);
